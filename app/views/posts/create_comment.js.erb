@@ -1,0 +1,9 @@
+alert('댓글 등록 완료')
+$('#body').val("");
+$('#comment_table tbody').prepend(
+  `
+  <tr>
+    <td><%= @c.body %></td>
+  </tr>
+  `
+)
