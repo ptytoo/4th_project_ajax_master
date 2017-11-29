@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     collection do
       # /posts/{내가 설정한 url}
       delete '/:comment_id/destroy_comment' => 'posts#destroy_comment', as: 'destroy_comment'
+      get '/page_scroll' => 'posts#page_scroll', as: 'scroll'
     end
   end
 

@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.order("updated_at").page(params[:page])
   end
 
   # GET /posts/1
@@ -80,11 +80,15 @@ class PostsController < ApplicationController
       @result = current_user.likes.find_by(post_id: @post.id).destroy
       # puts '좋아요 취소'
     end
-      @result = @result.frozen? 
+      @result = @result.frozen?
   end
 
   def destroy_comment
     @c = Comment.find(params[:comment_id]).destroy
+  end
+
+  def page_scroll
+    puts "hahahahahahah"
   end
 
   private
