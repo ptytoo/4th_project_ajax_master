@@ -24,6 +24,7 @@
   <%= text_field_tag "comment[body]" %>
   <%= submit_tag '등록'%>
 <% end %>
+<h3><span id="word_count">0</span>/50</h3>
 
 <table class="table" id="comment_table">
   <thead>
@@ -63,7 +64,19 @@
         url: "<%= create_comment_to_post_path %>",
         method: "POST",
         data: contents
-      })
+      });
+    });
+    var max_text_length = 50;
+    $('#create_comment').on('keyup',function(){
+        var text_length = $('#comment_body').val().length;
+        $('#word_count').text(text_length).addClass('text-success').removeClass('text_danger');
+        if(text_length >= max_text_length) //내가 입력한 텍스트의 길이가 최대 길이를 넘으면
+        {
+          alert("최대 길이 초과");
+          $('#word_count').addClass('text-danger').removeClass('text-success');
+          $('#comment_body').val($('#comment_body').val().substr(0,max_text_length));
+        }
+        $('#word_count').text(text_length);
     })
   });
 </script>

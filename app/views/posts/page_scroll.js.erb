@@ -1,1 +1,15 @@
-console.log("무한 스크롤");
+//메소드 call을 줄이기 위해 each를 ``안에 넣어준다.
+  $('#myTable tbody').append(
+    `
+    <% @posts.each do |post| %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><%= post.title %></td>
+        <td><%= truncate post.contents, length: 23 %></td>
+        <td><%= link_to 'Show', post %></td>
+        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    `
+  );

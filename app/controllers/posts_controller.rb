@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.order("updated_at").page(params[:page])
+    @posts = Post.order("updated_at DESC").page(params[:page])
   end
 
   # GET /posts/1
@@ -84,11 +84,12 @@ class PostsController < ApplicationController
   end
 
   def destroy_comment
+    puts @c
     @c = Comment.find(params[:comment_id]).destroy
   end
 
   def page_scroll
-    puts "hahahahahahah"
+    @posts = Post.order("updated_at DESC").page(params[:page])
   end
 
   private
