@@ -3,8 +3,14 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts do
     member do
+      # member : 자동으로 posts라는 얘 뒤에 id를 붙여주고 그 뒤에 create_comment나 like_post를 붙여준다.
+      # ex) (/posts/:id/{내가 설정한 url})
       post '/create_comment' => 'posts#create_comment', as: 'create_comment_to'
       post '/like_post' => 'posts#like_post', as: 'like_to'
+    end
+    collection do
+      # /posts/{내가 설정한 url}
+      delete '/:comment_id/destroy_comment' => 'posts#destroy_comment', as: 'destroy_comment'
     end
   end
 
